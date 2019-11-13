@@ -3,6 +3,7 @@
 __author__ = 'julianzaugg'
 
 import sys
+import contextlib
 import argparse
 
 from Bio import AlignIO
@@ -13,9 +14,26 @@ from Bio.Align import MultipleSeqAlignment
 
 from collections import Counter
 
+
+@contextlib.contextmanager
+def _smart_open(filename, mode='Ur'):
+    if filename == '-':
+        if mode is None or mode == '' or 'r' in mode:
+            fh = sys.stdin
+        else:
+            fh = sys.stdout
+    else:
+        fh = open(filename, mode)
+    try:
+        yield fh
+    finally:
+        if filename is not '-':
+            fh.close()
+
 def _process_args(input_parser, input_args):
 
-    align = AlignIO.read(args.input, "fasta")
+    with _smart_open(args.input, 'r') as fh:
+        align = AlignIO.read(fh, "fasta")
 
     n_seqs = len(align)
     alignment_length = align.get_alignment_length()
@@ -36,7 +54,7 @@ def _process_args(input_parser, input_args):
 
     new_alignment = MultipleSeqAlignment(records =new_seqs)
 
-    with open(args.output, 'w') as fh:
+    with _smart_open(args.output, 'w') as fh:
         SeqIO.write(new_alignment,fh, format = "fasta")
 
 def _restricted_float(x):
@@ -52,8 +70,12 @@ def _restricted_float(x):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Remove gappy columns and sequences from an alignment.')
-    parser.add_argument('-i', '--input', help='Input fasta file containing aligned sequences.', required=True)
-    parser.add_argument('-o', '--output', help='Output filename. Default STDOUT', required=True, default="-")
+    parser.add_argument('-i', '--input', #type=argparse.FileType('r'),
+                        help='Input fasta file containing aligned sequences. Default',
+                        default="-")
+    parser.add_argument('-o', '--output', #type=argparse.FileType('w'),
+                        help='Output filename. Default STDOUT',
+                        default="-")
 
     parser.add_argument("-c", "--col_gap_fraction",
                         help = "Columns with fraction of gaps higher or equal to this are removed. Default = 1.0",
