@@ -71,7 +71,7 @@ def _restricted_float(x):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Remove gappy columns and sequences from an alignment.')
     parser.add_argument('-i', '--input', #type=argparse.FileType('r'),
-                        help='Input fasta file containing aligned sequences. Default',
+                        help='Input fasta file containing aligned sequences. Default STDIN',
                         default="-")
     parser.add_argument('-o', '--output', #type=argparse.FileType('w'),
                         help='Output filename. Default STDOUT',
