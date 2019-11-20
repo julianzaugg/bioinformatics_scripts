@@ -27,7 +27,7 @@ def _smart_open(filename, mode='Ur'):
     try:
         yield fh
     finally:
-        if filename is not '-':
+        if filename != '-':
             fh.close()
 
 def _process_args(input_parser, input_args):
