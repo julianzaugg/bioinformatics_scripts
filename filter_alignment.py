@@ -40,7 +40,7 @@ def _process_args(input_parser, input_args):
     columns_to_keep = []
 
     for position in range(alignment_length):
-        if Counter(align[:, position])["-"]/n_seqs >= args.col_gap_fraction:
+        if (Counter(align[:, position])["-"] + Counter(align[:, position])["."])/n_seqs >= args.col_gap_fraction:
             continue
         columns_to_keep.append(position)
 
