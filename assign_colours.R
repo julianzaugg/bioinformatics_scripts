@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # Takes user supplied table and assigns colours to columns using set palettes.
 
 detachAllPackages <- function() {
@@ -40,10 +42,6 @@ options <- commandArgs(trailingOnly = TRUE)
 in_table <- options[1]
 out_table <- options[2]
 column_str <- options[3]
-
-# in_table <- "/Users/julianzaugg/Desktop/ACE/major_projects/three_poles/results/rubisco/analysis/itol/rubisco_summary_table.tsv"
-# out_table <- "/Users/julianzaugg/Desktop/ACE/major_projects/three_poles/results/rubisco/analysis/itol/rubisco_summary_table_processed.tsv"
-# column_str <- "Phylum,Class"
 
 if (!file.exists(in_table)){
   stop("Invalid input file")
