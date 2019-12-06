@@ -15,11 +15,11 @@ detachAllPackages <- function() {
 }
 detachAllPackages()
 
-library(plyr)
-library(dplyr)
-library(tidyr)
-library(RColorBrewer)
-library(reshape2)
+# library(plyr)
+# library(dplyr)
+# library(tidyr)
+# library(RColorBrewer)
+# library(reshape2)
 
 #library(viridis)
 #test_palette <- rev(viridis(12))
