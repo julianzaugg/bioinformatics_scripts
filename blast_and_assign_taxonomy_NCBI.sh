@@ -1,5 +1,10 @@
 module load blast/2.9.0.binary
 
+# NOTE - "Taxonomy name lookup from taxid requires installation of taxdb database":
+# "The BLAST taxonomy database consists of a pair of files (taxdb.bti and taxdb.btd) that are available 
+# as a compressed archive from the NCBI BLAST FTP site (ftp://ftp.ncbi.nlm.nih.gov/blast/db/taxdb.tar.gz)"
+# These files should be downloaded and in the same directory as the database.
+
 # Location of rankedlineage.dmp file from NCBI
 # Download from https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/new_taxdump/new_taxdump.zip
 NCBI_TAXID_LINEAGES="rankedlineage.dmp"
