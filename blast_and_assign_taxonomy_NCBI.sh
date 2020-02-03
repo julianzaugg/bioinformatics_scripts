@@ -5,6 +5,8 @@ module load blast/2.9.0.binary
 # as a compressed archive from the NCBI BLAST FTP site (ftp://ftp.ncbi.nlm.nih.gov/blast/db/taxdb.tar.gz)"
 # These files should be downloaded and in the same directory as the database (if the database directory is not
 # on the path, these files should be copied/symlinked to the same directory as the query sequences / this script)
+# EDIT - Actually, testing indicates the solution to including taxonomy information is to ensure the database directory is on the path
+# export BLASTDB=path/to/database
 
 # Location of rankedlineage.dmp file from NCBI
 # Download from https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/new_taxdump/new_taxdump.zip
