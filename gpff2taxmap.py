@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 # Take gpff file and generate a tab-delimited tax map file for building BLAST database
+# Should also work on gbff files
 
 import sys
 import argparse
