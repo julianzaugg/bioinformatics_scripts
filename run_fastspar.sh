@@ -8,6 +8,7 @@ OUTDIR="fastpar_results"
 THREADS=1
 PARALLEL_THREADS=36
 BOOTSTRAP_PERMUTATIONS=1000
+FASTSPAR_ITERATIONS=50 # not implemented
 
 run_fastspar(){
 # $1 Input OTU table
@@ -36,4 +37,5 @@ export -f run_fastspar
 export THREADS
 export PARALLEL_THREADS
 export BOOTSTRAP_PERMUTATIONS
+export FASTSPAR_ITERATIONS
 run_fastspar $OTU_TABLE $OUTDIR "OTU"
