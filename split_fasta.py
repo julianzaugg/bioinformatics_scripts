@@ -40,7 +40,6 @@ def _process_args(input_parser, input_args):
 
 
 if __name__ == "__main__":
-    contigs="/Users/julianzaugg/Desktop/ACE/temp/contigs.fasta"
     parser = argparse.ArgumentParser(description='Split a FASTA file into individual files, one per entry.'
                                                  'Assumes unique names.')
     parser.add_argument('-i', '--input',
