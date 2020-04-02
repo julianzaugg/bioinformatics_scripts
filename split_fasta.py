@@ -36,7 +36,7 @@ def _process_args(input_parser, input_args):
         for s in sequences:
             outname="{}.fasta".format(s.name)
             with open(Path(output_dir) / outname, 'w') as fh2:
-                SeqIO.write(s, fh2, format="fasta")
+                SeqIO.write(s, fh2, format="fasta-2line")
 
 
 if __name__ == "__main__":
