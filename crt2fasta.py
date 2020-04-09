@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Convert crisper recognition tool (CRT) output to FASTA. Specifically spacer sequences.
+Convert crispr recognition tool (CRT) output to FASTA. Specifically spacer sequences.
 https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-8-209
 
 Example input:
@@ -93,7 +93,7 @@ def _process_args(input_parser, input_args):
 
 
 if  __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Extract spacer sequences from crisper recognition tool output.')
+    parser = argparse.ArgumentParser(description='Extract spacer sequences from crispr recognition tool output.')
     parser.add_argument('-i', '--input',
                         help='Input should be output (file or STDOUT) from crisper recognition tool. Default STDIN',
                         default="-")
