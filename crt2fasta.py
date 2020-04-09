@@ -87,9 +87,9 @@ def _process_args(input_parser, input_args):
                     seq_set.add(str(spacer_seq_record.seq))
                 elif not input_args.unique:
                     spacer_sequence_records.append(spacer_seq_record)
-
-    with _smart_open(input_args.output, 'w') as fh:
-        SeqIO.write(spacer_sequence_records,fh, format = "fasta-2line")
+    if len(spacer_sequence_records) != 0:
+        with _smart_open(input_args.output, 'w') as fh:
+            SeqIO.write(spacer_sequence_records,fh, format = "fasta-2line")
 
 
 if  __name__ == "__main__":
