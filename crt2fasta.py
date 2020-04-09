@@ -66,8 +66,8 @@ def _process_args(input_parser, input_args):
 
     spacer_sequence_records = []
     seq_set = set()
-    for crispr_match_block in re.findall("CRISPR.*?Repeats",data,re.DOTALL):
-        crispr_id = re.match("CRISPR\s\d*",crispr_match_block)[0].replace(" ", "_")
+    for crispr_match_block in re.findall("CRISPR\s[0-9]+.*?Repeats",data,re.DOTALL):
+        crispr_id = re.findall("CRISPR\s[0-9]+",crispr_match_block)[0].replace(" ", "_")
         crispr_block_values = [line.replace("\t\t", "\t").split("\t") for line in crispr_match_block.split("\n")[4:-2]]
         for entry_idx, entry in enumerate(crispr_block_values):
             position = entry[0]
