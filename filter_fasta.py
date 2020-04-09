@@ -31,10 +31,10 @@ def _process_args(input_parser, input_args):
     filtered_sequences = sequences
     if input_args.min_length != None:
         print("Filtering by minimum length of: " + str(input_args.min_length))
-        filtered_sequences = [s for s in sequences if len(s) >= input_args.min_length]
+        filtered_sequences = [s for s in filtered_sequences if len(s) >= input_args.min_length]
     if input_args.max_length != None:
         print("Filtering by maximum length of: " + str(input_args.max_length))
-        filtered_sequences = [s for s in sequences if len(s) <= input_args.max_length]
+        filtered_sequences = [s for s in filtered_sequences if len(s) <= input_args.max_length]
 
     print("Filtering complete. Removed " + str(N_seqs - len(filtered_sequences)) + " sequences")
     with _smart_open(input_args.output, 'w') as fh:
