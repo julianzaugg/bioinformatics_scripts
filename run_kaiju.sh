@@ -32,7 +32,7 @@ fi
 #     echo "No kaiju .fmi file specified \$3, exiting"
 #     exit 1
 # fi
-if [[ ! $3 == *.fi ]]; then
+if [[ ! $3 == *.fmi ]]; then
     echo "No kaiju .fmi file specified \$3, exiting"
     exit 1
 fi
