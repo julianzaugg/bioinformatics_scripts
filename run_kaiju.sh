@@ -47,8 +47,8 @@ else
     PREFIX=${i%.fastq.gz}
 fi
 if [ -z "$6" ]; then
-    echo "No output suffix specified, defaulting to kiaju_out \$6"
-    SUFFIX="kiaju_out"
+    echo "No output suffix specified, defaulting to random 8-character string \$6"
+    SUFFIX=$cat /dev/urandom | tr -cd 'a-f' | head -c 8)
 else
     SUFFIX=$6
 fi
@@ -70,14 +70,14 @@ if [ ! -z "$8" ]; then
     if [[ ! -f $4/${PREFIX}_${SUFFIX}.krona ]]; then
         kaiju2krona -t $2 -n $8 -i $4/${PREFIX}_${SUFFIX}.tsv -o $4/${PREFIX}_${SUFFIX}.krona
     fi
-    if [[ ! -f $4/kaiju2table_done ]]; then
+    if [[ ! -f $4/kaiju2table_${SUFFIX}_done ]]; then
         kaiju2table -t $2 -n $8 -p -r species -o $4/${PREFIX}_${SUFFIX}_species.tsv $4/${PREFIX}_${SUFFIX}.tsv
         kaiju2table -t $2 -n $8 -p -r genus -o $4/${PREFIX}_${SUFFIX}_genus.tsv $4/${PREFIX}_${SUFFIX}.tsv
         kaiju2table -t $2 -n $8 -p -r family -o $4/${PREFIX}_${SUFFIX}_family.tsv $4/${PREFIX}_${SUFFIX}.tsv
         kaiju2table -t $2 -n $8 -p -r order -o $4/${PREFIX}_${SUFFIX}_order.tsv $4/${PREFIX}_${SUFFIX}.tsv
         kaiju2table -t $2 -n $8 -p -r class -o $4/${PREFIX}_${SUFFIX}_class.tsv $4/${PREFIX}_${SUFFIX}.tsv
         kaiju2table -t $2 -n $8 -p -r phylum -o $4/${PREFIX}_${SUFFIX}_phylum.tsv $4/${PREFIX}_${SUFFIX}.tsv
-        touch $4/kaiju2table_done
+        touch $4/kaiju2table_${SUFFIX}_done
     fi
 fi
 
