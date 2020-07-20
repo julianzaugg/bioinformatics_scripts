@@ -15,7 +15,7 @@ function run_kaiju() {
 # if [ -z "$1" ]; then
 #     echo "No fastq.gz file specified \$1, exiting"
 #     exit 1
-fi
+# fi
 if [[ ! $1 == *.fastq.gz ]]; then
     echo "Input read file must end with fastq.gz \$1, exiting"
     exit 1
@@ -55,14 +55,13 @@ fi
 THREADS=${7:-5}
 
 if [[ ! -f $4/${PREFIX}_${SUFFIX}.tsv ]]; then
-kaiju \
--i $1 \
--t $2 \
--f $3 \
--o $4/${PREFIX}_${SUFFIX}.tsv \
--z $THREADS \
--a greedy
-
+    kaiju \
+    -i $1 \
+    -t $2 \
+    -f $3 \
+    -o $4/${PREFIX}_${SUFFIX}.tsv \
+    -z $THREADS \
+    -a greedy
 fi 
 
 # If names file provided, generate output for each taxonomy level
