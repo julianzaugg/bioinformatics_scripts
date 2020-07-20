@@ -12,19 +12,27 @@ function run_kaiju() {
 # $7 threads (default 5)
 # $8 kaiju names file (optional)
 
-if [ -z "$1" ]; then
-    echo "No fastq.gz file specified \$1, exiting"
-    exit 1
+# if [ -z "$1" ]; then
+#     echo "No fastq.gz file specified \$1, exiting"
+#     exit 1
 fi
 if [[ ! $1 == *.fastq.gz ]]; then
     echo "Input read file must end with fastq.gz \$1, exiting"
     exit 1
 fi
-if [ -z "$2" ]; then
+# if [ -z "$2" ]; then
+#     echo "No kaiju nodes.dmp file specified \$2, exiting"
+#     exit 1
+# fi
+if [[ ! $2 == *.dmp ]]; then
     echo "No kaiju nodes.dmp file specified \$2, exiting"
     exit 1
 fi
-if [ -z "$3" ]; then
+# if [ -z "$3" ]; then
+#     echo "No kaiju .fmi file specified \$3, exiting"
+#     exit 1
+# fi
+if [[ ! $3 == *.fi ]]; then
     echo "No kaiju .fmi file specified \$3, exiting"
     exit 1
 fi
@@ -59,14 +67,19 @@ fi
 
 # If names file provided, generate output for each taxonomy level
 if [ ! -z "$8" ]; then
-    kaiju2krona -t $2 -n $8 -i $4/${PREFIX}_${SUFFIX}.tsv -o $4/${PREFIX}_${SUFFIX}.krona
-
-    kaiju2table -t $2 -n $8 -p -r species -o $4/${PREFIX}_${SUFFIX}_species.tsv $4/${PREFIX}_${SUFFIX}.tsv
-    kaiju2table -t $2 -n $8 -p -r genus -o $4/${PREFIX}_${SUFFIX}_genus.tsv $4/${PREFIX}_${SUFFIX}.tsv
-    kaiju2table -t $2 -n $8 -p -r family -o $4/${PREFIX}_${SUFFIX}_family.tsv $4/${PREFIX}_${SUFFIX}.tsv
-    kaiju2table -t $2 -n $8 -p -r order -o $4/${PREFIX}_${SUFFIX}_order.tsv $4/${PREFIX}_${SUFFIX}.tsv
-    kaiju2table -t $2 -n $8 -p -r class -o $4/${PREFIX}_${SUFFIX}_class.tsv $4/${PREFIX}_${SUFFIX}.tsv
-    kaiju2table -t $2 -n $8 -p -r phylum -o $4/${PREFIX}_${SUFFIX}_phylum.tsv $4/${PREFIX}_${SUFFIX}.tsv
+    
+    if [[ ! -f $4/${PREFIX}_${SUFFIX}.krona ]]; then
+        kaiju2krona -t $2 -n $8 -i $4/${PREFIX}_${SUFFIX}.tsv -o $4/${PREFIX}_${SUFFIX}.krona
+    fi
+    if [[ ! -f $4/kaiju2table_done ]]; then
+        kaiju2table -t $2 -n $8 -p -r species -o $4/${PREFIX}_${SUFFIX}_species.tsv $4/${PREFIX}_${SUFFIX}.tsv
+        kaiju2table -t $2 -n $8 -p -r genus -o $4/${PREFIX}_${SUFFIX}_genus.tsv $4/${PREFIX}_${SUFFIX}.tsv
+        kaiju2table -t $2 -n $8 -p -r family -o $4/${PREFIX}_${SUFFIX}_family.tsv $4/${PREFIX}_${SUFFIX}.tsv
+        kaiju2table -t $2 -n $8 -p -r order -o $4/${PREFIX}_${SUFFIX}_order.tsv $4/${PREFIX}_${SUFFIX}.tsv
+        kaiju2table -t $2 -n $8 -p -r class -o $4/${PREFIX}_${SUFFIX}_class.tsv $4/${PREFIX}_${SUFFIX}.tsv
+        kaiju2table -t $2 -n $8 -p -r phylum -o $4/${PREFIX}_${SUFFIX}_phylum.tsv $4/${PREFIX}_${SUFFIX}.tsv
+        touch $4/kaiju2table_done
+    fi
 fi
 
 }
