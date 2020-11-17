@@ -48,7 +48,7 @@ else
 fi
 if [ -z "$6" ]; then
     echo "No output suffix specified, defaulting to random 8-character string \$6"
-    SUFFIX=$cat /dev/urandom | tr -cd 'a-f' | head -c 8)
+    SUFFIX=$(cat /dev/urandom | tr -cd 'a-f' | head -c 8)
 else
     SUFFIX=$6
 fi
