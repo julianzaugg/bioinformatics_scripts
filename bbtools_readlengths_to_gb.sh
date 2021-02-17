@@ -1,4 +1,4 @@
-#! /usr/bin/awk -f
+#!/usr/bin/env bash
 
 # Takes the output from bbtools readlength.sh and calculates the gigabases
 
